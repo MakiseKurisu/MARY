@@ -51,49 +51,52 @@ LRESULT CALLBACK RichEditProc(
                 LPTSTR pString;
 
                 //Search for comments first
-                for (i = 0; (i < nText) && (tr.lpstrText[i] != TEXT(';')); i++);
-                if (tr.lpstrText[i] != TEXT(';'))   //No comment has been found
+                i = 0;
+                do
                 {
-                }
-                pString = &tr.lpstrText[i];
-                tr.chrg.cpMin = FirstChar + i;
-
-                //Search the end of line or the end of buffer
-                for (; (i < nText) && (tr.lpstrText[i] != TEXT('\x0D')); i++);
-                //if (i < nText)
-                {
-                    tr.lpstrText[i] = TEXT('\0');
-                }
-                tr.chrg.cpMax = FirstChar + i;
-
-                //Now we must search the range for the tabs
-                if (tr.chrg.cpMax - tr.chrg.cpMin)
-                {
-                    for (i = tr.chrg.cpMin; i < tr.chrg.cpMax; i++)
+                    for (; (i < nText) && (tr.lpstrText[i] != TEXT(';')); i++);
+                    if (tr.lpstrText[i] != TEXT(';'))   //No comment has been found
                     {
-                        if (tr.lpstrText[i] == TEXT('\t'))
+                    }
+                    pString = &tr.lpstrText[i];
+                    tr.chrg.cpMin = FirstChar + i;
+
+                    //Search the end of line or the end of buffer
+                    for (; (i < nText) && (tr.lpstrText[i] != TEXT('\x0D')); i++);
+                    //if (i < nText)
+                    {
+                        tr.lpstrText[i] = TEXT('\0');
+                }
+                    tr.chrg.cpMax = FirstChar + i;
+
+                    //Now we must search the range for the tabs
+                    if (tr.chrg.cpMax - tr.chrg.cpMin)
+                    {
+                        for (i = tr.chrg.cpMin; i < tr.chrg.cpMax; i++)
                         {
-                            tr.lpstrText[i] = TEXT('\0');
+                            if (tr.lpstrText[i] == TEXT('\t'))
+                            {
+                                tr.lpstrText[i] = TEXT('\0');
+                            }
+                        }
+
+                        i = tr.chrg.cpMin;
+                        while (i < tr.chrg.cpMax)
+                        {
+                            if (tr.lpstrText[i])
+                            {
+                                SIZE_T length = lstrlen(&tr.lpstrText[i]);
+                                SendMessage(hWnd, EM_POSFROMCHAR, (WPARAM) &rect, FirstChar + i);
+                                DrawText(hDC, &tr.lpstrText[i], -1, &rect, 0);
+                                i += length;
+                            }
+                            else
+                            {
+                                i++;
+                            }
                         }
                     }
-
-                    i = tr.chrg.cpMin;
-                    while (i < tr.chrg.cpMax)
-                    {
-                        if (tr.lpstrText[i])
-                        {
-                            SIZE_T length = lstrlen(&tr.lpstrText[i]);
-                            SendMessage(hWnd, EM_POSFROMCHAR, (WPARAM) &rect, FirstChar + i);
-                            DrawText(hDC, &tr.lpstrText[i], -1, &rect, 0);
-                            i += length;
-                        }
-                        else
-                        {
-                            i++;
-                        }
-                    }
-                }
-
+                } while (tr.chrg.cpMax - tr.chrg.cpMin);
 
             }
             GlobalFree(tr.lpstrText);
@@ -118,8 +121,9 @@ LRESULT CALLBACK EditorProcCreate(
     _In_  LPARAM lParam
     )
 {
+    unsigned int TabStops [] = { 36 };
     hWndRichEdit = CreateWindowEx(WS_EX_CLIENTEDGE, MSFTEDIT_CLASS, NULL, WS_CHILD | WS_VISIBLE | ES_MULTILINE | WS_VSCROLL | WS_HSCROLL, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, hWnd, 0, hInstance, NULL);
-    SendMessage(hWndRichEdit,EM_SETEDITSTYLE,SES_EMULATESYSEDIT,SES_EMULATESYSEDIT);  //Make it emulate system edit control so the text color update doesn't take very long
+    SendMessage(hWndRichEdit, EM_SETEDITSTYLE, SES_EMULATESYSEDIT, SES_EMULATESYSEDIT);  //Make it emulate system edit control so the text color update doesn't take very long
 
     //Subclass the richedit control.
     procRichEdit = (WNDPROC) SetWindowLongPtr(hWndRichEdit, GWL_WNDPROC, (LONG_PTR) RichEditProc);
@@ -131,9 +135,12 @@ LRESULT CALLBACK EditorProcCreate(
     //SetColor();
     SendMessage(hWndRichEdit, EM_SETMODIFY, FALSE, 0);
 
-    //Set event mask.
+    //Set the event mask.
     SendMessage(hWndRichEdit, EM_SETEVENTMASK, FALSE, ENM_MOUSEEVENTS);
     //SendMessage(hWndRichEdit, EM_EMPTYUNDOBUFFER, 0, 0);
+
+    //Set the tab width
+    SendMessage(hWndRichEdit, EM_SETTABSTOPS, 1, (LPARAM) &TabStops);
 
     //Set the focus
     SetFocus(hWndRichEdit);
