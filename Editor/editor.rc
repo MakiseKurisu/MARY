@@ -7,7 +7,7 @@ BEGIN
     BEGIN
         MENUITEM "&Open...\tCtrl+O", IDM_OPEN
         MENUITEM "&Close\tCtrl+W", IDM_CLOSE
-        MENUITEM "&Save...\tCtrl+S", IDM_SAVE
+        MENUITEM "&Save\tCtrl+S", IDM_SAVE
         MENUITEM "Save &As...", IDM_SAVEAS
         MENUITEM SEPARATOR
         MENUITEM "E&xit\tAlt+F4", IDM_EXIT
@@ -36,7 +36,10 @@ BEGIN
         MENUITEM "&Go To Line...\tCtrl+G", IDM_GOTOLINE
     END
     
-    MENUITEM "Options", IDM_OPTION
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Preferences\tCtrl+P", IDM_PREFERENCE
+    END
 END
 
 IDD_OPTIONDLG DIALOG DISCARDABLE  0, 0, 183, 54
@@ -107,4 +110,6 @@ BEGIN
     "H", IDM_REPLACE, VIRTKEY, CONTROL, NOINVERT
     
     "G", IDM_GOTOLINE, VIRTKEY, CONTROL, NOINVERT
+    
+    "P", IDM_PREFERENCE, VIRTKEY, CONTROL, NOINVERT
 END

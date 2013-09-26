@@ -24,7 +24,7 @@
 #define IDM_REPLACE                     1023
 #define IDM_GOTOLINE                    1024
 
-#define IDM_OPTION                      1030
+#define IDM_PREFERENCE                  1030
 #pragma endregion Menu
 
 #pragma endregion Dialog
