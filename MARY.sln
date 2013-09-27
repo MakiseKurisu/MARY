@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.20827.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor\Editor.vcxproj", "{57E4D26B-E93E-4656-8353-5A24D4256A37}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scintilla", "scintilla\scintilla.vcxproj", "{34A1798A-934E-43F6-A127-F49CE2ED17A8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scite", "scite\scite.vcxproj", "{B9E4A93D-7CC1-4085-ABAA-4CC09D5EA057}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{57E4D26B-E93E-4656-8353-5A24D4256A37}.Debug|Win32.ActiveCfg = Debug|Win32
-		{57E4D26B-E93E-4656-8353-5A24D4256A37}.Debug|Win32.Build.0 = Debug|Win32
-		{57E4D26B-E93E-4656-8353-5A24D4256A37}.Release|Win32.ActiveCfg = Release|Win32
-		{57E4D26B-E93E-4656-8353-5A24D4256A37}.Release|Win32.Build.0 = Release|Win32
+		{34A1798A-934E-43F6-A127-F49CE2ED17A8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{34A1798A-934E-43F6-A127-F49CE2ED17A8}.Debug|Win32.Build.0 = Debug|Win32
+		{34A1798A-934E-43F6-A127-F49CE2ED17A8}.Release|Win32.ActiveCfg = Release|Win32
+		{34A1798A-934E-43F6-A127-F49CE2ED17A8}.Release|Win32.Build.0 = Release|Win32
+		{B9E4A93D-7CC1-4085-ABAA-4CC09D5EA057}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B9E4A93D-7CC1-4085-ABAA-4CC09D5EA057}.Debug|Win32.Build.0 = Debug|Win32
+		{B9E4A93D-7CC1-4085-ABAA-4CC09D5EA057}.Release|Win32.ActiveCfg = Release|Win32
+		{B9E4A93D-7CC1-4085-ABAA-4CC09D5EA057}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
