@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scintilla", "scintilla\scin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scite", "scite\scite.vcxproj", "{B9E4A93D-7CC1-4085-ABAA-4CC09D5EA057}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor", "editor\editor.vcxproj", "{9A384298-8075-4BDA-8736-52BE65E6550D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,6 +23,10 @@ Global
 		{B9E4A93D-7CC1-4085-ABAA-4CC09D5EA057}.Debug|Win32.Build.0 = Debug|Win32
 		{B9E4A93D-7CC1-4085-ABAA-4CC09D5EA057}.Release|Win32.ActiveCfg = Release|Win32
 		{B9E4A93D-7CC1-4085-ABAA-4CC09D5EA057}.Release|Win32.Build.0 = Release|Win32
+		{9A384298-8075-4BDA-8736-52BE65E6550D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9A384298-8075-4BDA-8736-52BE65E6550D}.Debug|Win32.Build.0 = Debug|Win32
+		{9A384298-8075-4BDA-8736-52BE65E6550D}.Release|Win32.ActiveCfg = Release|Win32
+		{9A384298-8075-4BDA-8736-52BE65E6550D}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
